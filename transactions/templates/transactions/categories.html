@@ -1,0 +1,13 @@
+<a href="{% url 'transaction_list' %}">Головна</a>
+<a href="{% url 'category_list' %}">Категорії</a>
+<a href="{% url 'budget_dashboard' %}">Бюджетний звіт</a>
+<a href="/admin/">Адмін-панель</a>
+
+<h1>Категорії транзакцій</h1>
+<ul>
+    {% for ct in categories %}
+    <li>
+        <a href="{% url 'transactions_by_category' ct.id %}">{{ct.name}}</a>
+    </li>>
+    {% endfor %}
+</ul>

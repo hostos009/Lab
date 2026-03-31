@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Бюджетний звіт</title>
+</head>
+<body>
+    <a href="{% url 'transaction_list' %}">Головна</a>
+    <a href="{% url 'category_list' %}">Категорії</a>
+    <a href="{% url 'budget_dashboard' %}">Бюджетний звіт</a>
+    <a href="/admin/">Адмін-панель</a>
+    <h1>Система бюджетування</h1>
+    <div class="card income">
+        <h3>Дохід</h3>
+        <p> {{ total_debit }} грн</p>
+    </div>
+
+    <div class="card expense">
+        <h3>Витрати</h3>
+        <p> {{ total_credit }} грн</p>
+    </div>
+
+    <div class="card balance">
+        <h3>Поточний баланс</h3>
+        <p> {{ balance }} грн</p>
+    </div>
+
+    <br><br>
+    <a href="{% url 'transaction_list' %}">Повернутися до списку транзакцій</a>
+</body>
+</html>

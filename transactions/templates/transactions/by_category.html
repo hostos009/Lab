@@ -1,0 +1,26 @@
+<a href="{% url 'transaction_list' %}">Головна</a>
+<a href="{% url 'category_list' %}">Категорії</a>
+<a href="{% url 'budget_dashboard' %}">Бюджетний звіт</a>
+<a href="/admin/">Адмін-панель</a>
+
+<h1>Транзакції категорії: {{ category.name }}</h1>
+<table border="1">
+    <tr>
+        <th>Опис</th>
+        <th>Сума</th>
+        <th>Тип</th>
+    </tr>
+    {% for t in transactions %}
+    <tr>
+        <th>{{ t.desc }}</th>
+        <th>{{ t.amount }}</th>
+        <th>{{ t.get_transaction_type_display }}</th>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Транзакцій немає</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="{% url 'category_list' %}">Назад до категорій</a>
