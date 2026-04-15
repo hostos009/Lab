@@ -38,6 +38,12 @@ class Transaction(models.Model):
         null=True,
         blank=True
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата створення"
+    )
+
 
     def __str__(self):
+        date = self.created_at.strftime('%Y/%m/%d') if self.created_at else "-1"
         return f"{self.desc} ({self.amount})"

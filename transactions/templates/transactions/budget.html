@@ -8,7 +8,16 @@
     <a href="{% url 'category_list' %}">Категорії</a>
     <a href="{% url 'budget_dashboard' %}">Бюджетний звіт</a>
     <a href="/admin/">Адмін-панель</a>
+
     <h1>Система бюджетування</h1>
+
+    <form method="get">
+        <label>З: <input type="date" name="start_date" value="{{ start_date }}"></label>
+        <label>По: <input type="date" name="end_date" value="{{ end_date }}"></label>
+        <button type="submit">Розрахувати</button>
+        <a href="{% url 'budget_dashboard' %}">Скинути</a>
+    </form>
+
     <div class="card income">
         <h3>Дохід</h3>
         <p> {{ total_debit }} грн</p>
@@ -23,6 +32,28 @@
         <h3>Поточний баланс</h3>
         <p> {{ balance }} грн</p>
     </div>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Опис</th>
+                <th>Сума</th>
+                <th>Тип</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+            <tr>
+                <td>{{ t.created_at|date:"d.m.Y" }}</td>
+                <td>{{ t.desc }}</td>
+                <td>{{ t.amount }} грн</td>
+                <td>{{ t.get_transaction_type_display }}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">За вказаний період транзакцій не знайдено.</td></tr>{% endfor %}
+        </tbody>
+    </table>
 
     <br><br>
     <a href="{% url 'transaction_list' %}">Повернутися до списку транзакцій</a>
